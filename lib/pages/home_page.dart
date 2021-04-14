@@ -10,6 +10,12 @@ class HomePage extends StatelessWidget {
         title: Text('ToDo'),
       ),
       body: WorksListWidget(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // add new work
+        },
+        child: Icon(Icons.add),
+      ),
     );
   }
 }
