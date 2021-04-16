@@ -23,10 +23,38 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
       );
     }
 
+    Widget _form(String label, Function function) {
+      return Container(
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(bottom: 20, top: 10),
+              child: Text('Email'),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 20),
+              child: Text('Password'),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+              child: ElevatedButton(
+                child: Text(label),
+                onPressed: function,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
     return Scaffold(
       body: Column(
         children: <Widget>[
           _logo(),
+          _form('Authorization', () {}),
         ],
       ),
     );
