@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'pages/authentication_page.dart';
 import 'pages/home_page.dart';
 
 void main() {
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData.dark(),
-      home: HomePage(),
+      home: AuthorizationPage(),
     );
   }
 }
