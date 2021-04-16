@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'pages/authentication_page.dart';
+import 'pages/authorization_page.dart';
 
 void main() {
   runApp(MyApp());
