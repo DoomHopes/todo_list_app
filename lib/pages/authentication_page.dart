@@ -10,6 +10,10 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
+  String _email;
+  String _password;
+  bool _showLogin = true;
+
   @override
   Widget build(BuildContext context) {
     Widget _logo() {
@@ -82,7 +86,10 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
                 height: 50,
                 width: MediaQuery.of(context).size.width,
                 child: ElevatedButton(
-                  child: Text(label),
+                  child: Text(
+                    label,
+                    style: TextStyle(fontSize: 20),
+                  ),
                   onPressed: function,
                 ),
               ),
@@ -92,11 +99,40 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
       );
     }
 
+    void _buttonAction() {
+      _email = _emailController.text;
+      _password = _passwordController.text;
+
+      _emailController.clear();
+      _passwordController.clear();
+    }
+
     return Scaffold(
       body: Column(
         children: <Widget>[
           _logo(),
-          _form('Authorization', () {}),
+          _showLogin
+              ? Column(
+                  children: <Widget>[
+                    _form('Login', _buttonAction),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _showLogin = false;
+                          });
+                        },
+                        child: Text(
+                          'Not register yet? Register!',
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      ),
+                    )
+                  ],
+                )
+              : _form('Register', _buttonAction),
         ],
       ),
     );
