@@ -126,13 +126,32 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
                         },
                         child: Text(
                           'Not register yet? Register!',
-                          style: TextStyle(fontSize: 15),
+                          style: TextStyle(fontSize: 20),
                         ),
                       ),
                     )
                   ],
                 )
-              : _form('Register', _buttonAction),
+              : Column(
+                  children: <Widget>[
+                    _form('Register', _buttonAction),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _showLogin = true;
+                          });
+                        },
+                        child: Text(
+                          'Already registered? Login!',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
         ],
       ),
     );
