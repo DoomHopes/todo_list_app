@@ -19,7 +19,7 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
           child: Align(
             child: Text(
               'TODO App',
-              style: TextStyle(fontSize: 30),
+              style: TextStyle(fontSize: 50),
             ),
           ),
         ),
@@ -78,9 +78,13 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
             ),
             Padding(
               padding: EdgeInsets.only(left: 20, right: 20),
-              child: ElevatedButton(
-                child: Text(label),
-                onPressed: function,
+              child: Container(
+                height: 50,
+                width: MediaQuery.of(context).size.width,
+                child: ElevatedButton(
+                  child: Text(label),
+                  onPressed: function,
+                ),
               ),
             ),
           ],
