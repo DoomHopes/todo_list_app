@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:todo_list_app/models/user_model.dart';
+import 'package:todo_list_app/services/auth.dart';
 
 class AuthorizationPage extends StatefulWidget {
   @override
@@ -13,6 +16,8 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
   String _email;
   String _password;
   bool _showLogin = true;
+
+  AuthService _service = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -106,12 +111,56 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
       );
     }
 
-    void _buttonAction() {
+    Future<void> _loginButtonAction() async {
       _email = _emailController.text;
       _password = _passwordController.text;
 
-      _emailController.clear();
-      _passwordController.clear();
+      // change validation
+      if (_email.isEmpty || _password.isEmpty) return;
+
+      UserModel user = await _service.signInWithEmailAndPass(
+          _email.trim(), _password.trim());
+
+      // change error checking
+      if (user == null) {
+        Fluttertoast.showToast(
+            msg: "Something went wrong",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      } else {
+        _emailController.clear();
+        _passwordController.clear();
+      }
+    }
+
+    Future<void> _registerButtonAction() async {
+      _email = _emailController.text;
+      _password = _passwordController.text;
+
+      // change validation
+      if (_email.isEmpty || _password.isEmpty) return;
+
+      UserModel user = await _service.registerWithEmailAndPass(
+          _email.trim(), _password.trim());
+
+      // change error checking
+      if (user == null) {
+        Fluttertoast.showToast(
+            msg: "Something went wrong",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      } else {
+        _emailController.clear();
+        _passwordController.clear();
+      }
     }
 
     return Scaffold(
@@ -121,7 +170,7 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
           _showLogin
               ? Column(
                   children: <Widget>[
-                    _form('Login', _buttonAction),
+                    _form('Login', _loginButtonAction),
                     Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -141,7 +190,7 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
                 )
               : Column(
                   children: <Widget>[
-                    _form('Register', _buttonAction),
+                    _form('Register', _registerButtonAction),
                     Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: 20, vertical: 20),

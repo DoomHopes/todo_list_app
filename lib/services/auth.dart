@@ -4,7 +4,6 @@ import 'package:todo_list_app/models/user_model.dart';
 class AuthService {
   final FirebaseAuth _fAuth = FirebaseAuth.instance;
 
-  // ignore: missing_return
   Future<UserModel> signInWithEmailAndPass(String eMail, String pass) async {
     try {
       UserCredential credential =
@@ -12,6 +11,7 @@ class AuthService {
       User user = credential.user;
       return UserModel.fromFirebase(user);
     } on FirebaseAuthException catch (e) {
+      print(e.toString());
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
         return null;
@@ -30,6 +30,7 @@ class AuthService {
       User user = credential.user;
       return UserModel.fromFirebase(user);
     } on FirebaseAuthException catch (e) {
+      print(e.toString());
       if (e.code == 'email-already-in-use') {
         print('email-already-in-use');
         return null;
