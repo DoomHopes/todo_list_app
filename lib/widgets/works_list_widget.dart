@@ -5,14 +5,14 @@ import 'package:todo_list_app/widgets/subtitle_widget.dart';
 
 class WorksListWidget extends StatelessWidget {
   final works = <WorkModel>[
-    WorkModel(name: 'name_1', level: 'started', date: DateTime.now()),
-    WorkModel(name: 'name_2', level: 'in the progress', date: DateTime.now()),
-    WorkModel(name: 'name_3', level: 'completed', date: DateTime.now()),
-    WorkModel(name: 'name_4', level: 'started', date: DateTime.now()),
-    WorkModel(name: 'name_5', level: 'started', date: DateTime.now()),
-    WorkModel(name: 'name_6', level: 'completed', date: DateTime.now()),
-    WorkModel(name: 'name_7', level: 'completed', date: DateTime.now()),
-    WorkModel(name: 'name_8', level: 'started', date: DateTime.now()),
+    WorkModel(name: 'name_1', level: 'started'),
+    WorkModel(name: 'name_2', level: 'in the progress'),
+    WorkModel(name: 'name_3', level: 'completed'),
+    WorkModel(name: 'name_4', level: 'started'),
+    WorkModel(name: 'name_5', level: 'started'),
+    WorkModel(name: 'name_6', level: 'completed'),
+    WorkModel(name: 'name_7', level: 'completed'),
+    WorkModel(name: 'name_8', level: 'started'),
   ];
 
   @override
