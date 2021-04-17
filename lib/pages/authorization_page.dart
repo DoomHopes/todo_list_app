@@ -19,13 +19,20 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
     Widget _logo() {
       return Padding(
         padding: EdgeInsets.only(top: 100),
-        child: Container(
-          child: Align(
-            child: Text(
-              'TODO App',
-              style: TextStyle(fontSize: 50),
+        child: Column(
+          children: [
+            Container(
+              child: Align(
+                child: Text(
+                  'TODO App',
+                  style: TextStyle(fontSize: 50),
+                ),
+              ),
             ),
-          ),
+            SizedBox(
+              height: 50,
+            ),
+          ],
         ),
       );
     }
