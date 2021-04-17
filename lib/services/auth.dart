@@ -4,6 +4,7 @@ import 'package:todo_list_app/models/user_model.dart';
 class AuthService {
   final FirebaseAuth _fAuth = FirebaseAuth.instance;
 
+  // ignore: missing_return
   Future<UserModel> signInWithEmailAndPass(String eMail, String pass) async {
     try {
       UserCredential credential =
