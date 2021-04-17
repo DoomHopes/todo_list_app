@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_list_app/widgets/drawer_widget.dart';
 import 'package:todo_list_app/widgets/works_list_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -9,6 +10,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('ToDo'),
       ),
+      drawer: DrawerWidget(),
       body: WorksListWidget(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
