@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'pages/authorization_page.dart';
+import 'pages/landing_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'ToDo',
       theme: ThemeData.dark(),
-      home: AuthorizationPage(),
+      home: LandingPage(),
     );
   }
 }
