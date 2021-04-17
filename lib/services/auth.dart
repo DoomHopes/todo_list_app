@@ -30,11 +30,23 @@ class AuthService {
       User user = credential.user;
       return UserModel.fromFirebase(user);
     } on FirebaseAuthException catch (e) {
-      return null;
+      if (e.code == 'email-already-in-use') {
+        print('email-already-in-use');
+        return null;
+      } else if (e.code == 'weak-password') {
+        print('weak-password');
+        return null;
+      }
     }
   }
 
   Future logOut() async {
     await _fAuth.signOut();
+  }
+
+  Stream<UserModel> get currentUser {
+    return _fAuth
+        .authStateChanges()
+        .map((User user) => user != null ? UserModel.fromFirebase(user) : null);
   }
 }
