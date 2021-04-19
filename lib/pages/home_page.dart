@@ -15,7 +15,6 @@ class _HomePageState extends State<HomePage> {
 
   AuthService _service = AuthService();
 
-  // Snake nav bar
   ShapeBorder bottomBarShape = const RoundedRectangleBorder(
     borderRadius: BorderRadius.all(Radius.circular(10)),
   );
@@ -23,6 +22,22 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var _snakeNavigationBar = SnakeNavigationBar.color(
+      behaviour: snakeBarStyle,
+      shape: bottomBarShape,
+      padding: const EdgeInsets.all(10),
+      currentIndex: sectionIndex,
+      showUnselectedLabels: true,
+      showSelectedLabels: true,
+      onTap: (index) => setState(() => sectionIndex = index),
+      items: [
+        const BottomNavigationBarItem(
+            icon: Icon(Icons.adjust), label: 'List of my cases'),
+        const BottomNavigationBarItem(
+            icon: Icon(Icons.search), label: 'Search for my cases'),
+      ],
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('ToDo'),
@@ -45,21 +60,7 @@ class _HomePageState extends State<HomePage> {
         },
         child: Icon(Icons.add),
       ),
-      bottomNavigationBar: SnakeNavigationBar.color(
-        behaviour: snakeBarStyle,
-        shape: bottomBarShape,
-        padding: const EdgeInsets.all(10),
-        currentIndex: sectionIndex,
-        showUnselectedLabels: true,
-        showSelectedLabels: true,
-        onTap: (index) => setState(() => sectionIndex = index),
-        items: [
-          const BottomNavigationBarItem(
-              icon: Icon(Icons.adjust), label: 'List of my cases'),
-          const BottomNavigationBarItem(
-              icon: Icon(Icons.search), label: 'Search for my cases'),
-        ],
-      ),
+      bottomNavigationBar: _snakeNavigationBar,
     );
   }
 }
