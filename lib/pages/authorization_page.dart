@@ -19,9 +19,6 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
 
   AuthService _service = AuthService();
 
-  final emailValid = RegExp(
-      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-
   @override
   Widget build(BuildContext context) {
     Widget _logo() {
@@ -118,20 +115,7 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
       _email = _emailController.text;
       _password = _passwordController.text;
 
-      if (!emailValid.hasMatch(_email)) {
-        Fluttertoast.showToast(
-          msg: "Enter email",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0,
-        );
-        return;
-      }
-
-      if (_password.isEmpty) {
+      if (_password.isEmpty || _email.isEmpty) {
         Fluttertoast.showToast(
           msg: "Enter password",
           toastLength: Toast.LENGTH_SHORT,
@@ -147,10 +131,9 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
       UserModel user = await _service.signInWithEmailAndPass(
           _email.trim(), _password.trim());
 
-      // change error checking
       if (user == null) {
         Fluttertoast.showToast(
-            msg: "Something went wrong",
+            msg: _service.errorMessage,
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
@@ -180,26 +163,12 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
         return;
       }
 
-      if (!emailValid.hasMatch(_email)) {
-        Fluttertoast.showToast(
-          msg: "Enter email",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0,
-        );
-        return;
-      }
-
       UserModel user = await _service.registerWithEmailAndPass(
           _email.trim(), _password.trim());
 
-      // change error checking
       if (user == null) {
         Fluttertoast.showToast(
-            msg: "Something went wrong",
+            msg: _service.errorMessage,
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
