@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 import 'package:todo_list_app/services/auth.dart';
 import 'package:todo_list_app/widgets/search_widget.dart';
 import 'package:todo_list_app/widgets/works_list_widget.dart';
@@ -13,6 +14,12 @@ class _HomePageState extends State<HomePage> {
   int sectionIndex = 0;
 
   AuthService _service = AuthService();
+
+  // Snake nav bar
+  ShapeBorder bottomBarShape = const RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(10)),
+  );
+  SnakeBarBehaviour snakeBarStyle = SnakeBarBehaviour.floating;
 
   @override
   Widget build(BuildContext context) {
@@ -38,23 +45,20 @@ class _HomePageState extends State<HomePage> {
         },
         child: Icon(Icons.add),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.adjust),
-            label: 'List of my cases',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search for my cases',
-          ),
-        ],
+      bottomNavigationBar: SnakeNavigationBar.color(
+        behaviour: snakeBarStyle,
+        shape: bottomBarShape,
+        padding: const EdgeInsets.all(10),
         currentIndex: sectionIndex,
-        onTap: (int value) {
-          setState(() {
-            sectionIndex = value;
-          });
-        },
+        showUnselectedLabels: true,
+        showSelectedLabels: true,
+        onTap: (index) => setState(() => sectionIndex = index),
+        items: [
+          const BottomNavigationBarItem(
+              icon: Icon(Icons.adjust), label: 'List of my cases'),
+          const BottomNavigationBarItem(
+              icon: Icon(Icons.search), label: 'Search for my cases'),
+        ],
       ),
     );
   }
