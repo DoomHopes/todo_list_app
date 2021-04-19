@@ -18,6 +18,21 @@ class HomePage extends StatelessWidget {
         },
         child: Icon(Icons.add),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.adjust),
+            label: 'List of my cases',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search for my cases',
+          ),
+        ],
+        onTap: (value) {
+          // do something
+        },
+      ),
     );
   }
 }
