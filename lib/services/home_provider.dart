@@ -1,22 +1,40 @@
+import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:todo_list_app/models/work_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeProvider extends ChangeNotifier {
-  List<WorkModel> works = [
-    WorkModel(name: 'name_1', level: 'started'),
-    WorkModel(name: 'name_2', level: 'in the progress'),
-    WorkModel(name: 'name_3', level: 'completed'),
-    WorkModel(name: 'name_4', level: 'started'),
-    WorkModel(name: 'name_5', level: 'started'),
-  ];
+  FirebaseFirestore rootRef = FirebaseFirestore.instance;
 
-  void addWork(WorkModel work) {
-    works.add(work);
-    notifyListeners();
+  StreamSubscription<QuerySnapshot> _worksSubscription;
+  List<WorkModel> works = [];
+
+  Future<DocumentReference> addworkToFirebase(WorkModel workModel) {
+    return FirebaseFirestore.instance
+        .collection(FirebaseAuth.instance.currentUser.uid)
+        .add({
+      'name': workModel.name,
+      'description': workModel.description,
+      'level': workModel.level,
+    });
   }
 
-  void deleteWork(WorkModel work) {
-    works.remove(work);
-    notifyListeners();
+  void getworkFromFirebase() {
+    _worksSubscription = FirebaseFirestore.instance
+        .collection(FirebaseAuth.instance.currentUser.uid)
+        .snapshots()
+        .listen((snapshot) {
+      works = [];
+      snapshot.docs.forEach((document) {
+        works.add(WorkModel(
+          name: document.data()['name'],
+          description: document.data()['description'],
+          level: document.data()['level'],
+        ));
+      });
+      notifyListeners();
+    });
   }
 }

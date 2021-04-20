@@ -33,6 +33,12 @@ class _HomePageState extends State<HomePage> {
   TextEditingController _filterTextController;
 
   @override
+  void initState() {
+    super.initState();
+    context.read<HomeProvider>().getworkFromFirebase();
+  }
+
+  @override
   Widget build(BuildContext context) {
     /// snakeNavigationBar
     var _snakeNavigationBar = SnakeNavigationBar.color(

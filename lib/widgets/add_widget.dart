@@ -70,7 +70,7 @@ class _AddWidgetState extends State<AddWidget> {
                   level: 'started',
                 );
                 Provider.of<HomeProvider>(context, listen: false)
-                    .addWork(workModel);
+                    .addworkToFirebase(workModel);
                 Fluttertoast.showToast(
                   msg: 'Added',
                   toastLength: Toast.LENGTH_SHORT,
