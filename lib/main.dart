@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list_app/models/user_model.dart';
 import 'package:todo_list_app/services/auth.dart';
+import 'package:todo_list_app/services/home_provider.dart';
 
 import 'pages/landing_page.dart';
 
@@ -26,10 +27,17 @@ class MyApp extends StatelessWidget {
     return StreamProvider<UserModel>.value(
       value: AuthService().currentUser,
       initialData: null,
-      child: MaterialApp(
-        title: 'ToDo',
-        theme: ThemeData.dark(),
-        home: LandingPage(),
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider<HomeProvider>(
+            create: (_) => HomeProvider(),
+          ),
+        ],
+        child: MaterialApp(
+          title: 'ToDo',
+          theme: ThemeData.dark(),
+          home: LandingPage(),
+        ),
       ),
     );
   }

@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_list_app/models/work_model.dart';
 import 'package:todo_list_app/services/auth.dart';
+import 'package:todo_list_app/services/home_provider.dart';
 import 'package:todo_list_app/widgets/works_list_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,20 +16,6 @@ class _HomePageState extends State<HomePage> {
   int sectionIndex = 0;
 
   AuthService _service = AuthService();
-
-  final works = <WorkModel>[
-    WorkModel(name: 'name_1', level: 'started'),
-    WorkModel(name: 'name_2', level: 'in the progress'),
-    WorkModel(name: 'name_3', level: 'completed'),
-    WorkModel(name: 'name_4', level: 'started'),
-    WorkModel(name: 'name_5', level: 'started'),
-    WorkModel(name: 'name_6', level: 'in the progress'),
-    WorkModel(name: 'name_7', level: 'completed'),
-    WorkModel(name: 'name_8', level: 'started'),
-    WorkModel(name: 'name_9', level: 'completed'),
-    WorkModel(name: 'name_10', level: 'in the progress'),
-    WorkModel(name: 'name_11', level: 'in the progress'),
-  ];
 
   // nav bar
   ShapeBorder bottomBarShape = const RoundedRectangleBorder(
@@ -53,6 +41,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    /// snakeNavigationBar
     var _snakeNavigationBar = SnakeNavigationBar.color(
       behaviour: snakeBarStyle,
       shape: bottomBarShape,
@@ -69,6 +58,7 @@ class _HomePageState extends State<HomePage> {
       ],
     );
 
+    /// Filter
     var _filterButton = Container(
       margin: EdgeInsets.only(top: 3, left: 7, right: 7, bottom: 5),
       height: 40,
@@ -144,31 +134,33 @@ class _HomePageState extends State<HomePage> {
       ),
     );
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('ToDo'),
-        actions: <Widget>[
-          Container(
-            padding: EdgeInsets.only(top: 10, right: 20, bottom: 10),
-            child: ElevatedButton(
-              child: Icon(Icons.exit_to_app_rounded),
-              onPressed: () {
-                _service.logOut();
-              },
+    return Consumer<HomeProvider>(
+      builder: (context, providerData, child) => Scaffold(
+        appBar: AppBar(
+          title: const Text('ToDo'),
+          actions: <Widget>[
+            Container(
+              padding: EdgeInsets.only(top: 10, right: 20, bottom: 10),
+              child: ElevatedButton(
+                child: Icon(Icons.exit_to_app_rounded),
+                onPressed: () {
+                  _service.logOut();
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
+        body: Column(
+          children: <Widget>[
+            _filterButton,
+            _filterForm,
+            WorksListWidget(
+              works: providerData.works,
+            ),
+          ],
+        ),
+        bottomNavigationBar: _snakeNavigationBar,
       ),
-      body: Column(
-        children: <Widget>[
-          _filterButton,
-          _filterForm,
-          WorksListWidget(
-            works: works,
-          ),
-        ],
-      ), //sectionIndex == 0 ? WorksListWidget() : SearchWidget(),
-      bottomNavigationBar: _snakeNavigationBar,
     );
   }
 }
