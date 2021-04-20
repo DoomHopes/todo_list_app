@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_list_app/models/work_model.dart';
 import 'package:todo_list_app/services/auth.dart';
 import 'package:todo_list_app/services/home_provider.dart';
+import 'package:todo_list_app/utils/constants.dart';
+import 'package:todo_list_app/widgets/add_widget.dart';
 import 'package:todo_list_app/widgets/works_list_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -30,14 +31,6 @@ class _HomePageState extends State<HomePage> {
   double _filterHeight = 0.0;
 
   TextEditingController _filterTextController;
-
-  var listItem =
-      <String>['any level', 'started', 'in the progress', 'completed']
-          .map(
-            (label) =>
-                DropdownMenuItem(child: Text(label.toString()), value: label),
-          )
-          .toList();
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +58,7 @@ class _HomePageState extends State<HomePage> {
       child: ElevatedButton(
         onPressed: () {
           setState(() {
-            _filterHeight = (_filterHeight == 0.0 ? 280.0 : 0.0);
+            _filterHeight = (_filterHeight == 0.0 ? 200.0 : 0.0);
           });
         },
         child: Row(
@@ -93,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                     _filterLevel = val;
                   });
                 },
-                items: listItem,
+                items: kListItemForFilter,
                 decoration: const InputDecoration(labelText: 'Level'),
               ),
               TextFormField(
@@ -150,15 +143,17 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        body: Column(
-          children: <Widget>[
-            _filterButton,
-            _filterForm,
-            WorksListWidget(
-              works: providerData.works,
-            ),
-          ],
-        ),
+        body: sectionIndex == 0
+            ? Column(
+                children: <Widget>[
+                  _filterButton,
+                  _filterForm,
+                  WorksListWidget(
+                    works: providerData.works,
+                  ),
+                ],
+              )
+            : AddWidget(),
         bottomNavigationBar: _snakeNavigationBar,
       ),
     );
