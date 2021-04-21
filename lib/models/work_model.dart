@@ -1,13 +1,9 @@
 class WorkModel {
-  final String name;
-  final String level;
-  final String description;
-  final String doc;
+  List<Work> works;
 
-  WorkModel({
-    this.name,
-    this.description,
-    this.level,
-    this.doc = '',
-  });
+  WorkModel({this.works});
+}
+
+class Work {
+  String name;
 }

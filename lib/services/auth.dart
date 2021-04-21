@@ -5,7 +5,6 @@ class AuthService {
   final FirebaseAuth _fAuth = FirebaseAuth.instance;
   String errorMessage;
 
-  // ignore: missing_return
   Future<UserModel> signInWithEmailAndPass(String eMail, String pass) async {
     try {
       UserCredential credential =
@@ -34,7 +33,6 @@ class AuthService {
     }
   }
 
-  // ignore: missing_return
   Future<UserModel> registerWithEmailAndPass(String eMail, String pass) async {
     try {
       UserCredential credential = await _fAuth.createUserWithEmailAndPassword(

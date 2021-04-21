@@ -15,9 +15,7 @@ class HomeProvider extends ChangeNotifier {
     return FirebaseFirestore.instance
         .collection(FirebaseAuth.instance.currentUser.uid)
         .add({
-      'name': workModel.name,
-      'description': workModel.description,
-      'level': workModel.level,
+      // some code
     });
   }
 
@@ -26,9 +24,7 @@ class HomeProvider extends ChangeNotifier {
         .collection(FirebaseAuth.instance.currentUser.uid)
         .doc()
         .update({
-      'name': workModel.name,
-      'description': workModel.description,
-      'level': workModel.level,
+      // some code
     });
   }
 
@@ -40,11 +36,8 @@ class HomeProvider extends ChangeNotifier {
       works = [];
       snapshot.docs.forEach((document) {
         works.add(WorkModel(
-          name: document.data()['name'],
-          description: document.data()['description'],
-          level: document.data()['level'],
-          doc: document.data()['doc'],
-        ));
+            // some code
+            ));
       });
       notifyListeners();
     });
