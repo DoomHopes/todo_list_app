@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_list_app/pages/detail_page.dart';
 import 'package:todo_list_app/widgets/subtitle_widget.dart';
 
 class WorksListWidget extends StatelessWidget {
@@ -22,6 +23,14 @@ class WorksListWidget extends StatelessWidget {
                 subtitle: subtitle(context, works[index]),
                 leading: Icon(Icons.adjust),
                 trailing: Icon(Icons.arrow_forward_ios),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetailPage(),
+                    ),
+                  );
+                },
               ),
             ),
           );

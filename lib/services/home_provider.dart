@@ -21,6 +21,17 @@ class HomeProvider extends ChangeNotifier {
     });
   }
 
+  Future<DocumentReference> updateWork(WorkModel workModel) {
+    return FirebaseFirestore.instance
+        .collection(FirebaseAuth.instance.currentUser.uid)
+        .doc()
+        .update({
+      'name': workModel.name,
+      'description': workModel.description,
+      'level': workModel.level,
+    });
+  }
+
   void getworkFromFirebase() {
     _worksSubscription = FirebaseFirestore.instance
         .collection(FirebaseAuth.instance.currentUser.uid)
@@ -32,6 +43,7 @@ class HomeProvider extends ChangeNotifier {
           name: document.data()['name'],
           description: document.data()['description'],
           level: document.data()['level'],
+          doc: document.data()['doc'],
         ));
       });
       notifyListeners();
