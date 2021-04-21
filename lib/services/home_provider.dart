@@ -40,6 +40,10 @@ class HomeProvider extends ChangeNotifier {
       Field(name: 'field_2'),
       Field(name: 'field_3'),
       Field(name: 'field_4'),
+      Field(name: 'field_4'),
+      Field(name: 'field_4'),
+      Field(name: 'field_4'),
+      Field(name: 'field_4'),
     ]),
   ];
 
