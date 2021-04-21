@@ -9,7 +9,39 @@ class HomeProvider extends ChangeNotifier {
   FirebaseFirestore rootRef = FirebaseFirestore.instance;
 
   StreamSubscription<QuerySnapshot> _worksSubscription;
-  List<WorkModel> works = [];
+
+  List<WorkModel> works = [
+    WorkModel(name: 'Work', fields: [
+      Field(name: 'field_1'),
+      Field(name: 'field_2'),
+      Field(name: 'field_3'),
+      Field(name: 'field_4'),
+    ]),
+    WorkModel(name: 'Education', fields: [
+      Field(name: 'field_1'),
+      Field(name: 'field_2'),
+      Field(name: 'field_3'),
+      Field(name: 'field_4'),
+    ]),
+    WorkModel(name: 'Relaxation', fields: [
+      Field(name: 'field_1'),
+      Field(name: 'field_2'),
+      Field(name: 'field_3'),
+      Field(name: 'field_4'),
+    ]),
+    WorkModel(name: 'Shopping list', fields: [
+      Field(name: 'field_1'),
+      Field(name: 'field_2'),
+      Field(name: 'field_3'),
+      Field(name: 'field_4'),
+    ]),
+    WorkModel(name: 'Apartment renovation', fields: [
+      Field(name: 'field_1'),
+      Field(name: 'field_2'),
+      Field(name: 'field_3'),
+      Field(name: 'field_4'),
+    ]),
+  ];
 
   Future<DocumentReference> addworkToFirebase(WorkModel workModel) {
     return FirebaseFirestore.instance

@@ -1,9 +1,12 @@
 class WorkModel {
-  List<Work> works;
+  String name;
+  List<Field> fields;
 
-  WorkModel({this.works});
+  WorkModel({this.name, this.fields});
 }
 
-class Work {
+class Field {
   String name;
+
+  Field({this.name});
 }
