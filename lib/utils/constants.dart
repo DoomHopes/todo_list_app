@@ -7,3 +7,7 @@ var kListItemForFilter =
               DropdownMenuItem(child: Text(label.toString()), value: label),
         )
         .toList();
+
+TextStyle kTextStyle = TextStyle(
+  fontSize: 20,
+);
