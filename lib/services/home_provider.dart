@@ -6,11 +6,13 @@ import 'package:todo_list_app/models/work_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeProvider extends ChangeNotifier {
-  FirebaseFirestore rootRef = FirebaseFirestore.instance;
+  FirebaseFirestore _rootRef = FirebaseFirestore.instance;
 
   StreamSubscription<QuerySnapshot> _worksSubscription;
 
-  List<WorkModel> works = [
+  List<WorkModel> works = [];
+
+  /*List<WorkModel> works = [
     WorkModel(name: 'Work', fields: [
       Field(name: 'field_1'),
       Field(name: 'field_2'),
@@ -44,15 +46,18 @@ class HomeProvider extends ChangeNotifier {
       Field(name: 'field_4'),
       Field(name: 'field_4'),
       Field(name: 'field_4'),
+      Field(name: 'field_5'),
+      Field(name: 'field_5'),
+      Field(name: 'field_5'),
+      Field(name: 'field_5'),
+      Field(name: 'field_5'),
     ]),
-  ];
+  ];*/
 
   Future<DocumentReference> addworkToFirebase(WorkModel workModel) {
     return FirebaseFirestore.instance
         .collection(FirebaseAuth.instance.currentUser.uid)
-        .add({
-      // some code
-    });
+        .add({'name': workModel.name, 'fields': workModel.fields});
   }
 
   Future<DocumentReference> updateWork(WorkModel workModel) {
@@ -72,8 +77,9 @@ class HomeProvider extends ChangeNotifier {
       works = [];
       snapshot.docs.forEach((document) {
         works.add(WorkModel(
-            // some code
-            ));
+          name: document.data()['name'],
+          fields: document.data()['fields'],
+        ));
       });
       notifyListeners();
     });
