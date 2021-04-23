@@ -12,52 +12,15 @@ class HomeProvider extends ChangeNotifier {
 
   List<WorkModel> works = [];
 
-  /*List<WorkModel> works = [
-    WorkModel(name: 'Work', fields: [
-      Field(name: 'field_1'),
-      Field(name: 'field_2'),
-      Field(name: 'field_3'),
-      Field(name: 'field_4'),
-    ]),
-    WorkModel(name: 'Education', fields: [
-      Field(name: 'field_1'),
-      Field(name: 'field_2'),
-      Field(name: 'field_3'),
-      Field(name: 'field_4'),
-    ]),
-    WorkModel(name: 'Relaxation', fields: [
-      Field(name: 'field_1'),
-      Field(name: 'field_2'),
-      Field(name: 'field_3'),
-      Field(name: 'field_4'),
-    ]),
-    WorkModel(name: 'Shopping list', fields: [
-      Field(name: 'field_1'),
-      Field(name: 'field_2'),
-      Field(name: 'field_3'),
-      Field(name: 'field_4'),
-    ]),
-    WorkModel(name: 'Apartment renovation', fields: [
-      Field(name: 'field_1'),
-      Field(name: 'field_2'),
-      Field(name: 'field_3'),
-      Field(name: 'field_4'),
-      Field(name: 'field_4'),
-      Field(name: 'field_4'),
-      Field(name: 'field_4'),
-      Field(name: 'field_4'),
-      Field(name: 'field_5'),
-      Field(name: 'field_5'),
-      Field(name: 'field_5'),
-      Field(name: 'field_5'),
-      Field(name: 'field_5'),
-    ]),
-  ];*/
-
   Future<DocumentReference> addworkToFirebase(WorkModel workModel) {
     return FirebaseFirestore.instance
         .collection(FirebaseAuth.instance.currentUser.uid)
-        .add({'name': workModel.name, 'fields': workModel.fields});
+        .add({
+      'name': workModel.name,
+      'description': workModel.description,
+      'level': workModel.level,
+      'createdDate': workModel.createdDate,
+    });
   }
 
   Future<DocumentReference> updateWork(WorkModel workModel) {
@@ -78,7 +41,9 @@ class HomeProvider extends ChangeNotifier {
       snapshot.docs.forEach((document) {
         works.add(WorkModel(
           name: document.data()['name'],
-          fields: document.data()['fields'],
+          description: document.data()['description'],
+          level: document.data()['level'],
+          createdDate: document.data()['createdDate'],
         ));
       });
       notifyListeners();

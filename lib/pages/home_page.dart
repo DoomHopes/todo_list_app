@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list_app/services/auth.dart';
 import 'package:todo_list_app/services/home_provider.dart';
+import 'package:todo_list_app/widgets/add_widget.dart';
 import 'package:todo_list_app/widgets/list_view_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -41,7 +42,14 @@ class _HomePageState extends State<HomePage> {
         ),
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AddWidget(),
+              ),
+            );
+          },
         ),
       ),
     );

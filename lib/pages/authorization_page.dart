@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:todo_list_app/models/user_model.dart';
 import 'package:todo_list_app/services/auth.dart';
+import 'package:todo_list_app/widgets/input_widget.dart';
 
 class AuthorizationPage extends StatefulWidget {
   @override
@@ -42,51 +43,17 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
       );
     }
 
-    Widget _input(Icon icon, String hint,
-        TextEditingController textEditingController, bool obscure) {
-      return Container(
-        padding: EdgeInsets.only(left: 20, right: 20),
-        child: TextField(
-          controller: textEditingController,
-          obscureText: obscure,
-          style: TextStyle(fontSize: 20),
-          decoration: InputDecoration(
-            hintStyle: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-              color: Colors.white30,
-            ),
-            hintText: hint,
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white, width: 3),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white54, width: 1),
-            ),
-            prefixIcon: Padding(
-              padding: EdgeInsets.only(left: 10, right: 10),
-              child: IconTheme(
-                data: IconThemeData(color: Colors.white),
-                child: icon,
-              ),
-            ),
-          ),
-        ),
-      );
-    }
-
     Widget _form(String label, Function function) {
       return Container(
         child: Column(
           children: <Widget>[
             Padding(
               padding: EdgeInsets.only(bottom: 20, top: 10),
-              child:
-                  _input(Icon(Icons.email), 'Email', _emailController, false),
+              child: input(Icon(Icons.email), 'Email', _emailController, false),
             ),
             Padding(
               padding: EdgeInsets.only(bottom: 20),
-              child: _input(
+              child: input(
                   Icon(Icons.lock), 'Password', _passwordController, true),
             ),
             SizedBox(

@@ -1,12 +1,8 @@
 class WorkModel {
   String name;
-  List<Field> fields;
+  String description;
+  String level;
+  DateTime createdDate;
 
-  WorkModel({this.name, this.fields});
-}
-
-class Field {
-  String name;
-
-  Field({this.name});
+  WorkModel({this.name, this.description, this.level, this.createdDate});
 }
