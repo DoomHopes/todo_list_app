@@ -18,28 +18,30 @@ class ListViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: works.length,
-      itemBuilder: (context, index) {
-        return Card(
-          child: ListTile(
-            leading: Text(_ago(works[index].createdDate)),
-            title: Text(works[index].name),
-            subtitle: subtitle(context, works[index]),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => DetailWidget(
-                    workModel: works[index],
+    return Expanded(
+      child: ListView.builder(
+        itemCount: works.length,
+        itemBuilder: (context, index) {
+          return Card(
+            child: ListTile(
+              leading: Text(_ago(works[index].createdDate)),
+              title: Text(works[index].name),
+              subtitle: subtitle(context, works[index]),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailWidget(
+                      workModel: works[index],
+                    ),
                   ),
-                ),
-              );
-            },
-            trailing: Icon(Icons.arrow_forward),
-          ),
-        );
-      },
+                );
+              },
+              trailing: Icon(Icons.arrow_forward),
+            ),
+          );
+        },
+      ),
     );
   }
 }
