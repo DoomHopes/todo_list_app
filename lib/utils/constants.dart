@@ -11,3 +11,7 @@ var kListItemForFilter =
 TextStyle kTextStyle = TextStyle(
   fontSize: 20,
 );
+
+TextStyle kTitleStyle = TextStyle(
+  fontSize: 25,
+);

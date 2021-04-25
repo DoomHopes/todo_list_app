@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list_app/models/work_model.dart';
 import 'package:todo_list_app/services/home_provider.dart';
+import 'package:todo_list_app/utils/constants.dart';
 
 class DetailWidget extends StatelessWidget {
   final WorkModel workModel;
@@ -28,11 +29,36 @@ class DetailWidget extends StatelessWidget {
         ],
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(workModel.name),
-          Text(workModel.description),
-          Text(workModel.createdDate.toString()),
-          Text(workModel.level),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              workModel.name,
+              style: kTitleStyle,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              workModel.description,
+              style: kTextStyle,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              workModel.createdDate.toString(),
+              style: kTextStyle,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              workModel.level,
+              style: kTextStyle,
+            ),
+          ),
         ],
       ),
     );
