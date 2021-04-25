@@ -62,7 +62,6 @@ class _DetailWidgetState extends State<DetailWidget> {
               style: kTitleStyle,
             ),
           ),
-          MyDivivder(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
@@ -101,6 +100,15 @@ class _DetailWidgetState extends State<DetailWidget> {
             ),
           ),
           MyDivivder(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'Date of completion : ' +
+                  convertTimeStampToHumanDate(
+                      widget.workModel.dateOfCompletion.millisecondsSinceEpoch),
+              style: kDateStyle,
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(

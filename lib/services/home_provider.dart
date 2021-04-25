@@ -18,6 +18,7 @@ class HomeProvider extends ChangeNotifier {
       'description': workModel.description,
       'level': workModel.level,
       'createdDate': workModel.createdDate,
+      'dateOfCompletion': workModel.dateOfCompletion,
     });
   }
 
@@ -52,6 +53,7 @@ class HomeProvider extends ChangeNotifier {
           description: document.data()['description'],
           level: document.data()['level'],
           createdDate: document.data()['createdDate'],
+          dateOfCompletion: document.data()['dateOfCompletion'],
         ));
       });
       notifyListeners();
