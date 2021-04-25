@@ -3,11 +3,22 @@ import 'package:provider/provider.dart';
 import 'package:todo_list_app/models/work_model.dart';
 import 'package:todo_list_app/services/home_provider.dart';
 import 'package:todo_list_app/utils/constants.dart';
+import 'package:intl/intl.dart';
 
 class DetailWidget extends StatelessWidget {
   final WorkModel workModel;
 
   DetailWidget({this.workModel});
+
+  String convertTimeStampToHumanDate(int timeStamp) {
+    var dateToTimeStamp = DateTime.fromMillisecondsSinceEpoch(timeStamp);
+    return DateFormat('dd/MM/yyyy').format(dateToTimeStamp);
+  }
+
+  String convertTimeStampToHumanHour(int timeStamp) {
+    var dateToTimeStamp = DateTime.fromMillisecondsSinceEpoch(timeStamp);
+    return DateFormat('HH:mm').format(dateToTimeStamp);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +59,8 @@ class DetailWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              workModel.createdDate.toString(),
+              convertTimeStampToHumanDate(
+                  workModel.createdDate.millisecondsSinceEpoch),
               style: kTextStyle,
             ),
           ),
