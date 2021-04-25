@@ -5,11 +5,18 @@ import 'package:todo_list_app/services/home_provider.dart';
 import 'package:todo_list_app/utils/constants.dart';
 import 'package:intl/intl.dart';
 
-class DetailWidget extends StatelessWidget {
+import 'my_divider.dart';
+
+class DetailWidget extends StatefulWidget {
   final WorkModel workModel;
 
   DetailWidget({this.workModel});
 
+  @override
+  _DetailWidgetState createState() => _DetailWidgetState();
+}
+
+class _DetailWidgetState extends State<DetailWidget> {
   String convertTimeStampToHumanDate(int timeStamp) {
     var dateToTimeStamp = DateTime.fromMillisecondsSinceEpoch(timeStamp);
     return DateFormat('dd/MM/yyyy').format(dateToTimeStamp);
@@ -20,10 +27,21 @@ class DetailWidget extends StatelessWidget {
     return DateFormat('HH:mm').format(dateToTimeStamp);
   }
 
+  String _filterLevel = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _filterLevel = widget.workModel.level;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text(
+          widget.workModel.name,
+        ),
         actions: <Widget>[
           Container(
             padding: EdgeInsets.only(top: 10, right: 20, bottom: 10),
@@ -32,7 +50,7 @@ class DetailWidget extends StatelessWidget {
               style: ButtonStyle(),
               onPressed: () {
                 Provider.of<HomeProvider>(context, listen: false)
-                    .deleteWork(workModel);
+                    .deleteWork(widget.workModel);
                 Navigator.pop(context);
               },
             ),
@@ -45,30 +63,56 @@ class DetailWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              workModel.name,
+              widget.workModel.name,
+              style: kTitleStyle,
+            ),
+          ),
+          MyDivivder(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'Description : ',
               style: kTitleStyle,
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              workModel.description,
+              widget.workModel.description,
               style: kTextStyle,
+            ),
+          ),
+          MyDivivder(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'Level : ',
+              style: kTitleStyle,
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(
-              convertTimeStampToHumanDate(
-                  workModel.createdDate.millisecondsSinceEpoch),
-              style: kTextStyle,
+            child: DropdownButtonFormField<String>(
+              value: _filterLevel,
+              onChanged: (String val) {
+                setState(() {
+                  _filterLevel = val;
+                  widget.workModel.level = _filterLevel;
+                  Provider.of<HomeProvider>(context, listen: false)
+                      .updateWork(widget.workModel);
+                });
+              },
+              items: kListItemForDetail,
             ),
           ),
+          MyDivivder(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              workModel.level,
-              style: kTextStyle,
+              'Created date : ' +
+                  convertTimeStampToHumanDate(
+                      widget.workModel.createdDate.millisecondsSinceEpoch),
+              style: kDateStyle,
             ),
           ),
         ],

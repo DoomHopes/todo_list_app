@@ -30,7 +30,7 @@ class HomeProvider extends ChangeNotifier {
         .collection(FirebaseAuth.instance.currentUser.uid)
         .doc(workModel.id)
         .update({
-      // some code
+      'level': workModel.level,
     });
   }
 
