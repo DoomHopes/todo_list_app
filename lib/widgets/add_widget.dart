@@ -61,6 +61,7 @@ class _AddWidgetState extends State<AddWidget> {
                     }
 
                     WorkModel workModel = new WorkModel(
+                      id: _title + _description,
                       name: _title,
                       description: _description,
                       level: 'started',

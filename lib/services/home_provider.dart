@@ -12,10 +12,12 @@ class HomeProvider extends ChangeNotifier {
 
   List<WorkModel> works = [];
 
-  Future<DocumentReference> addworkToFirebase(WorkModel workModel) {
-    return FirebaseFirestore.instance
+  addworkToFirebase(WorkModel workModel) {
+    FirebaseFirestore.instance
         .collection(FirebaseAuth.instance.currentUser.uid)
-        .add({
+        .doc(workModel.id)
+        .set({
+      'id': workModel.id,
       'name': workModel.name,
       'description': workModel.description,
       'level': workModel.level,
@@ -23,13 +25,22 @@ class HomeProvider extends ChangeNotifier {
     });
   }
 
-  Future<DocumentReference> updateWork(WorkModel workModel) {
-    return FirebaseFirestore.instance
+  void updateWork(WorkModel workModel) {
+    FirebaseFirestore.instance
         .collection(FirebaseAuth.instance.currentUser.uid)
-        .doc()
+        .doc(workModel.id)
         .update({
       // some code
     });
+  }
+
+  void deleteWork(WorkModel workModel) {
+    FirebaseFirestore.instance
+        .collection(FirebaseAuth.instance.currentUser.uid)
+        .doc(workModel.id)
+        .delete();
+    works.remove(workModel);
+    notifyListeners();
   }
 
   void getworkFromFirebase() {
@@ -40,6 +51,7 @@ class HomeProvider extends ChangeNotifier {
       works = [];
       snapshot.docs.forEach((document) {
         works.add(WorkModel(
+          id: document.data()['id'],
           name: document.data()['name'],
           description: document.data()['description'],
           level: document.data()['level'],
