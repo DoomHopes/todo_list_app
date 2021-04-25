@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:todo_list_app/models/work_model.dart';
@@ -7,8 +5,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeProvider extends ChangeNotifier {
   FirebaseFirestore _rootRef = FirebaseFirestore.instance;
-
-  StreamSubscription<QuerySnapshot> _worksSubscription;
 
   List<WorkModel> works = [];
 
@@ -44,7 +40,7 @@ class HomeProvider extends ChangeNotifier {
   }
 
   void getworkFromFirebase() {
-    _worksSubscription = FirebaseFirestore.instance
+    FirebaseFirestore.instance
         .collection(FirebaseAuth.instance.currentUser.uid)
         .snapshots()
         .listen((snapshot) {

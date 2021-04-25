@@ -19,12 +19,7 @@ class DetailWidget extends StatefulWidget {
 class _DetailWidgetState extends State<DetailWidget> {
   String convertTimeStampToHumanDate(int timeStamp) {
     var dateToTimeStamp = DateTime.fromMillisecondsSinceEpoch(timeStamp);
-    return DateFormat('dd/MM/yyyy').format(dateToTimeStamp);
-  }
-
-  String convertTimeStampToHumanHour(int timeStamp) {
-    var dateToTimeStamp = DateTime.fromMillisecondsSinceEpoch(timeStamp);
-    return DateFormat('HH:mm').format(dateToTimeStamp);
+    return DateFormat.yMMMd().format(dateToTimeStamp);
   }
 
   String _filterLevel = '';

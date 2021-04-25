@@ -6,7 +6,14 @@ class WorkModel {
   String description;
   String level;
   Timestamp createdDate;
+  Timestamp dateOfCompletion;
 
-  WorkModel(
-      {this.id, this.name, this.description, this.level, this.createdDate});
+  WorkModel({
+    this.id,
+    this.name,
+    this.description,
+    this.level,
+    this.createdDate,
+    this.dateOfCompletion,
+  });
 }
