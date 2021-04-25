@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_list_app/models/work_model.dart';
+import 'package:todo_list_app/widgets/detail_widget.dart';
 import 'package:todo_list_app/widgets/subtitle_widget.dart';
 
 class ListViewWidget extends StatelessWidget {
@@ -19,7 +20,14 @@ class ListViewWidget extends StatelessWidget {
             title: Text(works[index].name),
             subtitle: subtitle(context, works[index]),
             onTap: () {
-              // some code
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailWidget(
+                    workModel: works[index],
+                  ),
+                ),
+              );
             },
             trailing: Icon(Icons.arrow_forward),
           ),

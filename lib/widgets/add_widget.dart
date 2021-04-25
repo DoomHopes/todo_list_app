@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
@@ -63,7 +64,7 @@ class _AddWidgetState extends State<AddWidget> {
                       name: _title,
                       description: _description,
                       level: 'started',
-                      createdDate: DateTime.now(),
+                      createdDate: Timestamp.now(),
                     );
                     Provider.of<HomeProvider>(context, listen: false)
                         .addworkToFirebase(workModel);
