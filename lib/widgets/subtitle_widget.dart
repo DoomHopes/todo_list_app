@@ -1,9 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_list_app/models/work_model.dart';
-
-import 'package:timeago/timeago.dart' as timeago;
 
 Widget subtitle(BuildContext context, WorkModel works) {
   var color = Colors.grey;
@@ -24,10 +21,6 @@ Widget subtitle(BuildContext context, WorkModel works) {
       break;
   }
 
-  _ago(Timestamp t) {
-    return timeago.format(t.toDate());
-  }
-
   return Row(
     children: <Widget>[
       Expanded(
@@ -40,7 +33,7 @@ Widget subtitle(BuildContext context, WorkModel works) {
       SizedBox(width: 10),
       Expanded(
         flex: 3,
-        child: Text(works.level + ' ' + _ago(works.createdDate)),
+        child: Text(works.level),
       ),
     ],
   );
