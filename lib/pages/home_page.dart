@@ -81,7 +81,9 @@ class _HomePageState extends State<HomePage> {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        // Apply function
+                        context
+                            .read<HomeProvider>()
+                            .filterList(_filterTitle, _filterLevel);
                       },
                       child: Text('Apply'),
                     ),
@@ -92,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        // Clear function
+                        context.read<HomeProvider>().clearFilter();
                       },
                       child: Text('Clear'),
                     ),
