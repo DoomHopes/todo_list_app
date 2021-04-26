@@ -34,7 +34,7 @@ class _AddWidgetState extends State<AddWidget> {
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2019),
-      lastDate: DateTime.now(),
+      lastDate: DateTime(2022),
     ).then((picked) {
       if (picked != null && picked != _selectedDate) {
         setState(() {

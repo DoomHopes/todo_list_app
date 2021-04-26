@@ -4,8 +4,6 @@ import 'package:todo_list_app/models/work_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeProvider extends ChangeNotifier {
-  FirebaseFirestore _rootRef = FirebaseFirestore.instance;
-
   List<WorkModel> works = [];
 
   addworkToFirebase(WorkModel workModel) {
