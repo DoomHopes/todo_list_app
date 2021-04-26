@@ -55,25 +55,35 @@ class HomeProvider extends ChangeNotifier {
           dateOfCompletion: document.data()['dateOfCompletion'],
         ));
       });
+
+      _temp = works;
       notifyListeners();
     });
   }
 
   void filterList(String title, String level) {
-    _temp = works;
     List<WorkModel> someList = [];
-    for (int i = 0; i < works.length; i++) {
-      if (works[i].name == title && works[i].level == level) {
-        someList.add(works[i]);
+
+    if (level == 'any level') {
+      for (int i = 0; i < _temp.length; i++) {
+        if (_temp[i].name == title) {
+          someList.add(_temp[i]);
+        }
+      }
+    } else {
+      for (int i = 0; i < _temp.length; i++) {
+        if (_temp[i].name == title && _temp[i].level == level) {
+          someList.add(_temp[i]);
+        }
       }
     }
+
     works = someList;
     notifyListeners();
   }
 
   void clearFilter() {
     works = _temp;
-    _temp = [];
     notifyListeners();
   }
 }
