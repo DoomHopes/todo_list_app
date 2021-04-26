@@ -52,73 +52,76 @@ class _DetailWidgetState extends State<DetailWidget> {
           ),
         ],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              widget.workModel.name,
-              style: kTitleStyle,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                widget.workModel.name,
+                style: kTitleStyle,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              'Description : ',
-              style: kTitleStyle,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Description : ',
+                style: kTitleStyle,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              widget.workModel.description,
-              style: kTextStyle,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                widget.workModel.description,
+                style: kTextStyle,
+              ),
             ),
-          ),
-          MyDivivder(),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              'Level : ',
-              style: kTitleStyle,
+            MyDivivder(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Level : ',
+                style: kTitleStyle,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: DropdownButtonFormField<String>(
-              value: _filterLevel,
-              onChanged: (String val) {
-                setState(() {
-                  _filterLevel = val;
-                  widget.workModel.level = _filterLevel;
-                  Provider.of<HomeProvider>(context, listen: false)
-                      .updateWork(widget.workModel);
-                });
-              },
-              items: kListItemForDetail,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: DropdownButtonFormField<String>(
+                value: _filterLevel,
+                onChanged: (String val) {
+                  setState(() {
+                    _filterLevel = val;
+                    widget.workModel.level = _filterLevel;
+                    Provider.of<HomeProvider>(context, listen: false)
+                        .updateWork(widget.workModel);
+                  });
+                },
+                items: kListItemForDetail,
+              ),
             ),
-          ),
-          MyDivivder(),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              'Date of completion : ' +
-                  convertTimeStampToHumanDate(
-                      widget.workModel.dateOfCompletion.millisecondsSinceEpoch),
-              style: kDateStyle,
+            MyDivivder(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Date of completion : ' +
+                    convertTimeStampToHumanDate(widget
+                        .workModel.dateOfCompletion.millisecondsSinceEpoch),
+                style: kDateStyle,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              'Created date : ' +
-                  convertTimeStampToHumanDate(
-                      widget.workModel.createdDate.millisecondsSinceEpoch),
-              style: kDateStyle,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Created date : ' +
+                    convertTimeStampToHumanDate(
+                        widget.workModel.createdDate.millisecondsSinceEpoch),
+                style: kDateStyle,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
