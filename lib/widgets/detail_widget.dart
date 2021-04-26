@@ -35,7 +35,7 @@ class _DetailWidgetState extends State<DetailWidget> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.workModel.name,
+          'Detail',
         ),
         actions: <Widget>[
           Container(

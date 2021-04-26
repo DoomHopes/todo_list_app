@@ -5,7 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeProvider extends ChangeNotifier {
   List<WorkModel> works = [];
-  List<WorkModel> temp = [];
+  List<WorkModel> _temp = [];
 
   addworkToFirebase(WorkModel workModel) {
     FirebaseFirestore.instance
@@ -60,7 +60,7 @@ class HomeProvider extends ChangeNotifier {
   }
 
   void filterList(String title, String level) {
-    temp = works;
+    _temp = works;
     List<WorkModel> someList = [];
     for (int i = 0; i < works.length; i++) {
       if (works[i].name == title && works[i].level == level) {
@@ -72,8 +72,8 @@ class HomeProvider extends ChangeNotifier {
   }
 
   void clearFilter() {
-    works = temp;
-    temp = [];
+    works = _temp;
+    _temp = [];
     notifyListeners();
   }
 }
